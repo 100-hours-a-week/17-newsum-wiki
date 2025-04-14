@@ -1,7 +1,7 @@
 ---
 name: Spring-Backlog-Template
 about: 스프린트 백로그 템플릿
-title: ''
+title: "[S{스프린트 번호}_{파트}] 날짜 | 업무 요약"
 labels: 스프린트 백로그
 assignees: ''
 

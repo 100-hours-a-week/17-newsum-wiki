@@ -3,7 +3,7 @@ name: Daily-Scrum-Template
 about: 데일리 스크럼 템플릿
 title: "[날짜(요일)] 데일리 스크럼"
 labels: 데일리 스크럼
-assignees: YangTaeUk, rlagkswn00, tldnr1, sungjun-singer, gongsua, Hyunje1128, hyunjo325
+assignees: gongsua, Hyunje1128, hyunjo325, rlagkswn00, sungjun-singer, tldnr1, YangTaeUk
 
 ---
 
