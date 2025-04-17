@@ -1,0 +1,29 @@
+name: Update Markdown Timestamp
+
+on:
+  push:
+    paths:
+      - '**.md'
+
+jobs:
+  update-timestamp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Update timestamp in markdown files
+        run: |
+          FILES=$(git diff --name-only HEAD^ HEAD | grep '\.md$')
+          for file in $FILES; do
+            DATE=$(date +"%Y년 %m월 %d일")
+            sed -i "s/^🔗 이 문서는 .* 기준으로 마지막 수정되었습니다.$/🔗 이 문서는 $DATE 기준으로 마지막 수정되었습니다./" "$file"
+          done
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "자동 갱신: 문서 수정일 업데이트" || echo "No changes"
+          git push
