@@ -1,0 +1,29 @@
+name: Update Last Modified Date in Markdown
+
+on:
+  push:
+    paths:
+      - '**.md'
+
+jobs:
+  update-timestamp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Replace date in markdown files
+        run: |
+          DATE=$(date +"%Y년 %m월 %d일")
+          for file in $(git ls-files '*.md'); do
+            if grep -q '🔗 이 문서는 .* 기준으로 마지막 수정되었습니다.' "$file"; then
+              sed -i "s/🔗 이 문서는 .* 기준으로 마지막 수정되었습니다./🔗 이 문서는 $DATE 기준으로 마지막 수정되었습니다./" "$file"
+            fi
+          done
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git diff --staged --quiet || git commit -m "자동 갱신: 문서 수정일 업데이트" && git push
