@@ -5,6 +5,9 @@ on:
     paths:
       - '**.md'
 
+permissions:
+  contents: write
+
 jobs:
   update-timestamp:
     runs-on: ubuntu-latest
